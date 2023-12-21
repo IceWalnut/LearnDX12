@@ -1,0 +1,11 @@
+# Exceptions
+
+# Ignore VS / VS Code settings directory
+.vs
+.vscode
+
+# Ignore CLion directory
+.idea/
+
+# History
+.history
