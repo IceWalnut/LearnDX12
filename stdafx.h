@@ -37,6 +37,7 @@ bool InitializeWindow(HINSTANCE hInstance,
 	bool fullscreen);
 
 // main application loop
+// check for windows msgs, update our game logic, and render our frame
 void mainloop();
 
 // callback function for windows messages
