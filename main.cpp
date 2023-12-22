@@ -53,9 +53,36 @@ bool InitializeWindow(HINSTANCE hInstance,
 		 * 
 		 * `cbSize` is a common member found in many structures, and it typically represents the size ofthe structure
 		 * in bytes. The "cb" prefix stands for "count of bytes".
+		 * 
+		 * Structure:
+		 *		- cbSize: Size of the structure, in bytes
+		 *		- rcMonitor: A RECT structure that specifies the display monitor rectangle, in screen coordiates
+		 *		- rcWork: A RECT structure that specifies the work area rectangle of the display monitor, in 
+		 *			screen coordinates.
+		 *		- dwFlags: A set of flags that indicate which members of the structure are valid.
 		 */
 		MONITORINFO monitorInfo = { sizeof(monitorInfo) };
 
+		/**
+		 * GetMonitorInfo: retrieves infomation about a display monitor
+		 * Parameters:
+		 *		- hMonitor: Handle to the display monitor of interest
+		 *		- lpmi: Pointer to a `MONITORINFO` structure that receives information about the motitor
+		 */
 		GetMonitorInfo(hMon, &monitorInfo);
+
+		width = monitorInfo.rcMonitor.right - monitorInfo.rcMonitor.left;
+		height = monitorInfo.rcMonitor.bottom - monitorInfo.rcMonitor.top;
+
+
+
+		//---------------------------- fill out a WNDCLASSEX structure -------------------------//
+		WNDCLASSEX wc;
+
+		wc.cbSize = sizeof(WNDCLASSEX);
+
+		wc.style = CS_HREDRAW | CS_VREDRAW;
 	}
 }
+
+
