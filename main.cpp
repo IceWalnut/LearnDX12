@@ -77,11 +77,58 @@ bool InitializeWindow(HINSTANCE hInstance,
 
 
 		//---------------------------- fill out a WNDCLASSEX structure -------------------------//
+		/**
+		 * WNDCLASSEX
+		 * Window Class Extension. This is an extended version of the original `WNDCLASS` structure.
+		 * Contains infomation about a window class, specifying attibutes like the window procedure ( a function 
+		 * that processes msgs sent to a window), the background color, cursor, icon, and other characteristics 
+		 * of windows created with that class.
+		 */
 		WNDCLASSEX wc;
-
 		wc.cbSize = sizeof(WNDCLASSEX);
-
+		
+		/**
+		 * CS_HREDRAW	Class Style Horizontally Redraw
+		 *		Indicates that the class should redraw itself horizontally if it is resized.
+		 * CS_VREDRAW	Class Style Vertically Redraw
+		 *		Indicates that the class should redraw itself vertically if it is resized.
+		 */
 		wc.style = CS_HREDRAW | CS_VREDRAW;
+
+		/**
+		 * lpfnWndProc
+		 *		A function pointer to the window procedure, sometimes referred to as the window callback function.
+		 * The window procedure is a function that processes msgs sent to a window. It is a fundamental part of 
+		 * handling events and interactions in a graphical user interface (GUI) application.
+		 */
+		wc.lpfnWndProc = WndProc;
+
+		/**
+		 * cbClsExtra
+		 *		This member is an integer that represents the number of extra bytes to allocate for the class.
+		 * These bytes are typically used for custom class data.
+		 */
+		wc.cbClsExtra = NULL;
+
+		/**
+		 * cbWndExtra
+		 *		This member is an integer that represents the number of extra bytes ot allocate for each instance
+		 * of the window. These bytes are typically used for custom window-specific data.
+		 */
+		wc.cbWndExtra = NULL;
+
+		/**
+		 * hInstance
+		 *		This is a handle to the instance of the application. In Win32 programming, each instance of an
+		 * application has a unique handle. The `hInstance` variable typically comes from the `WinMain` function
+		 * as one of its parameters.
+		 */
+		wc.hInstance = hInstance;
+
+		wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+
+
+
 	}
 }
 
