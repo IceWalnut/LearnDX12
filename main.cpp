@@ -125,7 +125,32 @@ bool InitializeWindow(HINSTANCE hInstance,
 		 */
 		wc.hInstance = hInstance;
 
+		/**
+		 * Load the default icon and associate it with the `WNDCLASS` structure.
+		 *		- Param1: NULL
+		 *			Specifies the instance handle of the module containing the icon resource. A `NULL` value indicates
+		 *			that the system should use the default icon provided by the OS.
+		 *		- Param2: IDI_APPLICATION
+		 *			The resource identifier of the icon to be loaded. `IDI_APPLICATION` is a constant that represents
+		 *			the default application icon.
+		 * IDI stands for "Icon Identifier". It is a common prefix used in resource identifiers for icons in the 
+		 * Win32 API.
+		 *		For example:
+		 *			IDI_APPLICATION: This is a system-defined constant representing the default application icon.
+		 *			IDI_HAND: Represents the "hand" or "stop" cursor.(¹â±ê)
+		 *			IDI_QUESTION: Represents the "question mark" cursor.
+		 */
 		wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+
+		wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+
+		/**
+		 * hbrBackground: 
+		 *		specifies the handle to the background brush. The background brush is used to paint the background
+		 *		of the client area before the `WM_PAINT` message is processed.
+		 * (HBRUSH)(COLOR_WINDOW + 2)
+		 */
+		wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 2);
 
 
 
