@@ -173,11 +173,46 @@ bool InitializeWindow(HINSTANCE hInstance,
 
 
 		//-------------------------------------- Register the class --------------------------------------------//
+
+		/**
+		 * RegisterClassEx
+		 *		Register a window class for subsequent use in window creation and manipulation.
+		 * 1. Window Class Registration
+		 *		Before creating a window in a Windows application, you need to register a window class. A window class
+		 *		defines various attributes and behaviours of the window, such as its appearance, behaviour, and event
+		 *		handling.
+		 * 2. Extended Registration
+		 *		The `Ex` in `RegisterClassEx` stands for "extended", indicating that this function is an extended 
+		 *      version of the original `RegisterClass` function. The extended version allows for additional options 
+		 *		and features.
+		 * 3. WNDCLASSEX Structure
+		 *		The function takes as an argument a pointer to a `WNDCLASSEX` structure, which contains infomation
+		 *		about the window class. This structure includes members such as the window procedure, background color,
+		 *		icon, cursor, and other attributes.
+		 * 4. Error Handling
+		 *		The function returns a class atom, a unique identifier for the registered window class. If the 
+		 *		registration fails, the return value is zero, and you can use the `GetLastError` function to retrieve
+		 *		specific error infomation.
+		 */
 		if (!RegisterClassEx(&wc))
 		{
 			MessageBox(NULL, L"Error registering class", L"Error", MB_OK | MB_ICONERROR);
 			return false;
 		}
+
+
+		//---------------------------------------- Create Window ------------------------------------------------//
+		hwnd = CreateWindowEx(NULL,
+			WindowName,
+			WindowTitle,
+			WS_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT, CW_USEDEFAULT,
+			width, height,
+			NULL,
+			NULL,
+			hInstance,
+			NULL);
+
 	}
 }
 
