@@ -149,11 +149,35 @@ bool InitializeWindow(HINSTANCE hInstance,
 		 *		specifies the handle to the background brush. The background brush is used to paint the background
 		 *		of the client area before the `WM_PAINT` message is processed.
 		 * (HBRUSH)(COLOR_WINDOW + 2)
+		 *		Cast the result of the expression `COLOR_WINDOW + 2` to the type `HBRUSH`. COLOR_WINDOW is a constant
+		 * representing the default color of a window background.
+		 * HBRUSH: handle of a brush
 		 */
 		wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 2);
 
+		/**
+		 * lp: 
+		 *		stands for long pointer. In 32-bit Windows programming, a long pointer is a 32-bit pointer to a memory
+		 * sz:
+		 *		stands for "zero-terminated string". It indicates that the data is a null-terminated string, meaning a
+		 *		sequence of characters terminated by a null character ('\0').
+		 * lpszMenuName
+		 *		is a member of the WNDCLASS structure that specifies the name of the menu resource associated with the
+		 *		class. Setting it to NULL indicates that the window class does not have an associated menu.
+		 */
+		wc.lpszMenuName = NULL;
+
+		wc.lpszClassName = WindowName;
+		// small icon
+		wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
 
+		//-------------------------------------- Register the class --------------------------------------------//
+		if (!RegisterClassEx(&wc))
+		{
+			MessageBox(NULL, L"Error registering class", L"Error", MB_OK | MB_ICONERROR);
+			return false;
+		}
 	}
 }
 
